@@ -11,7 +11,7 @@ class User(models.Model):
         return self.email
 
 
-#     get_absolute_url - str - save
+#  todo:   get_absolute_url - str - save
 # class Meta: # new
 #         indexes = [models.Index(fields=["full_name"])]
 #         ordering = ["-full_name"]
@@ -23,6 +23,7 @@ class Author(models.Model):
     birthday = models.DateField()
     death = models.DateField(blank=True, null=True)
 
+    # todo: description txt
     def __str__(self):
         return f"{self.name} - {self.birthday} : {self.death or '-'}"
 
@@ -36,12 +37,15 @@ class Language(models.Model):
 
 
 class BaseBookClass(models.Model):
-    title = models.CharField(max_length=100, default="Unknown")
+    title = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author, related_name="book_author")
-    publish_year = models.IntegerField(default="Unknown")
-    pages = models.IntegerField(default="Unknown")
-    book_language = models.ManyToManyField(Language)
-    price = models.FloatField(default="Unknown")
+    publish_year = models.IntegerField()
+    pages = models.IntegerField()
+    book_language = models.ManyToManyField(Language, related_name="book_language")
+    price = models.FloatField()
+    file = models.FileField(upload_to='files')
+
+    # todo: description txt
 
     class Meta:
         abstract = True
@@ -56,6 +60,7 @@ class Book(BaseBookClass):
 
 class Magazine(BaseBookClass):
     authors = models.ManyToManyField(Author, related_name="magazine_author")
+    book_language = models.ManyToManyField(Language, related_name="magazine_language")
     issue = models.CharField(max_length=200)
 
     def __str__(self):
@@ -64,22 +69,31 @@ class Magazine(BaseBookClass):
 
 class AudioBook(BaseBookClass):
     authors = models.ManyToManyField(Author, related_name="Abook_author")
+    book_language = models.ManyToManyField(Language, related_name="audiobook_language")
     speaker = models.CharField(max_length=100)
     audio_language = models.ForeignKey(Language, default="Unknown", on_delete=models.SET_DEFAULT,
                                        related_name="audio_language")
-    time = models.TimeField(default="Unknown")
+    time = models.TimeField()
 
     def __str__(self):
         return f"{self.title} - {self.publish_year} : {self.time}"
 
 
 class Podcast(models.Model):
-    title = models.CharField(max_length=100, default="Unknown")
-    speaker = models.CharField(max_length=100, default="Unknown")
-    publish_year = models.IntegerField(default="Unknown")
-    time = models.TimeField(default="Unknown")
+    title = models.CharField(max_length=100)
+    speaker = models.CharField(max_length=100)
+    publish_year = models.IntegerField()
+    time = models.TimeField()
     audio_language = models.ForeignKey(Language, default="Unknown", on_delete=models.SET_DEFAULT)
-    price = models.FloatField(default="Unknown")
+    price = models.FloatField()
+    file = models.FileField(upload_to='files')
+
+    # todo: description txt
 
     def __str__(self):
         return f"{self.title} - {self.speaker} : {self.time}"
+
+
+class UserLib(models.Model):
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    file = models.ForeignKey(Book, on_delete=models.CASCADE)
