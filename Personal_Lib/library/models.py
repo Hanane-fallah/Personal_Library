@@ -94,6 +94,12 @@ class Podcast(models.Model):
         return f"{self.title} - {self.speaker} : {self.time}"
 
 
-class UserLib(models.Model):
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
-    file = models.ForeignKey(Book, on_delete=models.CASCADE)
+class UserLibrary(models.Model):
+    book_status = [
+        ('un', 'unread'),
+        ('re', 'reading'),
+        ('fi', 'finished')
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=False)
+    file = models.ForeignKey(Book, on_delete=models.CASCADE, unique=True)
+    status = models.CharField(max_length=2, choices=book_status, default='un')

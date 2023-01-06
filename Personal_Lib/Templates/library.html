@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+{% for book in books %}
+<form method="dialog">
+    <li>{{ book.id }} : {{ book.title }} - {{ book.publish_year}} <input type="submit" value={{book.id}} name="book_id">
+    <li>
+
+</form>
+{% endfor %}}
+</body>
+</html>
