@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>Home page</h1>
+<h4>See Library</h4>
+<li>Books:</li>
+{% for book in books %}
+<form method="post">
+    {% csrf_token %}
+    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value={{book.id}} name="add_book"><p>
+</form>
+{% endfor %}
+<br>
+<li>AudioBooks:</li>
+{% for book in audiobooks %}
+<form method="post">
+    {% csrf_token %}
+    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value="Add to lib" name="add_book"><p>
+</form>
+{% endfor %}
+<br>
+
+<li>Magazines:</li>
+{% for book in magazines %}
+<form method="post">
+    {% csrf_token %}
+    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value="Add to lib" name="add_book"><p>
+</form>
+{% endfor %}
+<br>
+
+<li>Podcasts:</li>
+{% for book in podcasts %}
+<form method="post">
+    {% csrf_token %}
+    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value="Add to lib" name="add_book"><p>
+</form>
+{% endfor %}
+</body>
+</html>
