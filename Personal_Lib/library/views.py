@@ -32,13 +32,6 @@ class AddBook(View):
         """
         return HttpResponse(request, response)
 
-def info(request, book_id):
-    book_obj = Book.objects.get(id=book_id)
-    context = {
-        'book': book_obj,
-    }
-    return render(request, 'library/book.html', context)
-
 
 class UserLib(View):
     def get(self, request, user_id):
@@ -50,16 +43,29 @@ class UserLib(View):
         }
         return render(request, 'library/library.html', context)
 
+def read(request, book_id):
+    book = Book.objects.get(id=book_id)
+    context = {
+        'book': book
+    }
+    return render(request, 'library/book.html', context)
 
 
+def info(request, book_id):
+    book_obj = Book.objects.get(id=book_id)
+    context = {
+        'book': book_obj,
+    }
+    return render(request, 'library/book_info.html', context)
 
 
-# def read(request, book_id):
+# def read(request):
 #
-#     book = Book.objects.get(id=book_id)
-#
-#     context = {
-#         'book': book
-#     }
-#
-#     return render(request, 'book.html', context)
+#     if request.method == 'POST':
+    # p = HttpResponse.get['file_path']
+    # print('path : ', p)
+    # response = p.open()
+    # print('response: ', response)
+    # return HttpResponse(request, response)
+
+    # return "NO"
