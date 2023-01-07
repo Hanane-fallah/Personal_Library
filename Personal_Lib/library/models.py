@@ -96,10 +96,10 @@ class Podcast(models.Model):
 
 class UserLibrary(models.Model):
     book_status = [
-        ('un', 'unread'),
-        ('re', 'reading'),
-        ('fi', 'finished')
+        ('unread', 'unread'),
+        ('reading', 'reading'),
+        ('finished', 'finished')
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, unique=False)
     file = models.ForeignKey(Book, on_delete=models.CASCADE, unique=True)
-    status = models.CharField(max_length=2, choices=book_status, default='un')
+    status = models.CharField(max_length=10, choices=book_status, default='unread')

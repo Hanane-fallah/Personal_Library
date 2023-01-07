@@ -9,9 +9,9 @@
 <h4>See Library</h4>
 <li>Books:</li>
 {% for book in books %}
-<form method="post">
+<form method="POST">
     {% csrf_token %}
-    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value={{book.id}} name="add_book"><p>
+    <p># {{ book.id }} : {{ book }} ~> <a href="{% url 'add_book' book.id %}" name="book_id">add to library </a></p>
 </form>
 {% endfor %}
 <br>

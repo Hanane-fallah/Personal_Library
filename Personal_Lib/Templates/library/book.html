@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+<h1>Book {{ book.title }}</h1>
+<h3>
+<!--todo: authors and book languages-->
+    <li>Publish Year : {{ book.publish_year }}</li>
+    <li>Pages : {{ book.pages }}</li>
+    <li>Pages : {{ book.pages }}</li>
+    <li>file : {{ book.file }}</li>
+    <br>
+    <a href="{% url 'user_lib' 1 %}">see your library</a>
+</h3>
+</body>
+</html>
