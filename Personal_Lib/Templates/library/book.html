@@ -29,7 +29,8 @@
     function compare_input()
     {
         var p=document.getElementById('page_input').value;
-
+        p = Number(p)
+        alert({{ user_book.status_value }} + p)
         // alert('You read  pages.'+ p+ {{ book.pages }} )
         if (({{ user_book.status_value }} + p) <= {{ book.pages }})
         {
