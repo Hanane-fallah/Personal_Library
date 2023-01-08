@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -11,34 +11,50 @@
 <form method="POST">
     {% csrf_token %}
     <div style="margin-left: 20px; color: forestgreen">
-        <p> {{ book.id }} : {{ book }} ~> <a href="{% url 'add_book' book.id %}" style="text-decoration: none; color: purple">Add to your library </a></p>
+        <p> {{ book.id }} : {{ book }} ~> <button onclick="alert('Done')">
+            <a href="{% url 'add_book' book.id %}" style="text-decoration: none; color: purple">Add to your library </a>
+        </button> </p>
     </div>
 </form>
 {% endfor %}
 <br>
 <li style="color: green">AudioBooks:</li>
 {% for book in audiobooks %}
-<form method="post">
+<form method="POST">
     {% csrf_token %}
-    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value="Add to lib" name="add_book"><p>
+    <div style="margin-left: 20px; color: forestgreen">
+        <p> {{ book.id }} : {{ book }} ~> <button onclick="alert('Done')">
+            <a href="#" style="text-decoration: none; color: purple">Add to your library </a>
+        </button></p>
+
+    </div>
 </form>
 {% endfor %}
 <br>
 
 <li style="color: green">Magazines:</li>
 {% for book in magazines %}
-<form method="post">
+<form method="POST">
     {% csrf_token %}
-    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value="Add to lib" name="add_book"><p>
+    <div style="margin-left: 20px; color: forestgreen">
+        <p> {{ book.id }} : {{ book }} ~> <button onclick="alert('Done')">
+            <a href="#" style="text-decoration: none; color: purple">Add to your library </a>
+        </button></p>
+
+    </div>
 </form>
 {% endfor %}
 <br>
 
 <li style="color: green">Podcasts:</li>
 {% for book in podcasts %}
-<form method="post">
+<form method="POST">
     {% csrf_token %}
-    <p># {{ book.id }} : {{ book }} ~> <input type="submit" value="Add to lib" name="add_book"><p>
+    <div style="margin-left: 20px; color: forestgreen">
+        <p> {{ book.id }} : {{ book }} ~> <button onclick="alert('Done')">
+            <a href="#" style="text-decoration: none; color: purple">Add to your library </a>
+        </button></p>
+    </div>
 </form>
 {% endfor %}
 <!--todo: user authentication-->
