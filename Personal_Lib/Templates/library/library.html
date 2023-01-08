@@ -8,14 +8,13 @@
 <h2 style="color: darkmagenta; padding: 10px">User 1 Library</h2>
 {% for book in books %}
     {% for b in user_books %}
-        {% if book.id == b.id %}
+        {% if book.id == b.file_id %}
 <form method="POST">
     {% csrf_token %}
 <!--    todo: book file-->
     <div style="padding: 10px;color: purple">
         <input type="button" value={{book}} name="book_file"> ~> Title : {{ book.title }} - {{ book.publish_year }}
         - <span>status : {{ b.status }}</span>
-        {% load static %}
         <a href="{% url 'book_info' book.id %}">  Info</a>
         <a href="{% url 'book_read' book.id %}">  Read</a>
         <br><br>
