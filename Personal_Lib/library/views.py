@@ -43,12 +43,39 @@ class UserLib(View):
         }
         return render(request, 'library/library.html', context)
 
-def read(request, book_id):
-    book = Book.objects.get(id=book_id)
-    context = {
-        'book': book
-    }
-    return render(request, 'library/book.html', context)
+
+class Read(View):
+    def get(self, request, book_id):
+        book = Book.objects.get(id=book_id)
+        user_book = UserLibrary.objects.get(file_id=book_id)
+        context = {
+            'book': book,
+            'user_book': user_book
+        }
+        return render(request, 'library/book.html', context)
+
+    def post(self, request, book_id):
+        page_num = request.POST['current_page']
+        user_book = UserLibrary.objects.get(file_id=book_id)
+        user_book.status_value += int(page_num)
+        book = Book.objects.get(id=book_id)
+
+        if user_book.status_value == 0:
+            user_book.status = 'unread'
+
+        elif user_book.status_value == book.pages:
+            user_book.status = 'finished'
+
+        elif user_book.status_value <= book.pages:
+            user_book.status = 'reading'
+
+        user_book.save()
+        user_book = UserLibrary.objects.get(file_id=book_id)
+        context = {
+            'book': book,
+            'user_book': user_book
+        }
+        return render(request, 'library/book.html', context)
 
 
 def info(request, book_id):
@@ -58,14 +85,3 @@ def info(request, book_id):
     }
     return render(request, 'library/book_info.html', context)
 
-
-# def read(request):
-#
-#     if request.method == 'POST':
-    # p = HttpResponse.get['file_path']
-    # print('path : ', p)
-    # response = p.open()
-    # print('response: ', response)
-    # return HttpResponse(request, response)
-
-    # return "NO"

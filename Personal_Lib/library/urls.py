@@ -7,6 +7,6 @@ urlpatterns = [
     path('addbook/<int:book_id>', views.AddBook.as_view(), name='add_book'),
     path('mylib/<int:user_id>', views.UserLib.as_view(), name="user_lib"),
     path('info/<int:book_id>', views.info, name="book_info"),
-    path('read/<int:book_id>', views.read, name="book_read"),
+    path('read/<int:book_id>', views.Read.as_view(), name="book_read"),
 
     ]

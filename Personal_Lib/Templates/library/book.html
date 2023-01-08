@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+
+    <h3 style="padding: 10px; color: indianred">Book Title : {{ book.title }}</h3>
+    <form method="post">
+    {% csrf_token %}
+
+        <input type="hidden" name="current_page" value=0 id="current_page">
+        <h4 style="padding-left: 12px; color: darkred">You are at page {{ user_book.status_value }}</h4>
+        {% if user_book.status_value == book.pages %}
+        <h4 style="padding-left: 12px; color: darkred">You Finished this book.</h4>
+        {% endif %}
+
+        <div style="padding-left: 12px; color: darkred">
+            Enter number of pages to read <input style="height: 20px; width: 45px" type="number" name="page_input" id="page_input">
+            <button style="color: darkred" onclick="compare_input()">Read</button>
+        </div>
+    <p>{{page_number}}</p>
+
+    </form>
+    <h3 style="color: indianred; padding-left: 10px"># <a href="{% url 'user_lib' 1 %}" style="text-decoration: none; color: indianred">Your Library</a> </h3>
+
+<script>
+    function compare_input()
+    {
+        var p=document.getElementById('page_input').value;
+
+        // alert('You read  pages.'+ p+ {{ book.pages }} )
+        if (({{ user_book.status_value }} + p) <= {{ book.pages }})
+        {
+            alert('You read '+p+' pages.')
+        }
+        else {
+            alert('Your book has '+ {{ book.pages }}+ ' pages.')
+            var p = 0
+
+        }
+        document.getElementById('current_page').value = p;
+    }
+</script>
+</body>
+</html>

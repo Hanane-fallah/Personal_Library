@@ -103,3 +103,4 @@ class UserLibrary(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, unique=False)
     file = models.ForeignKey(Book, on_delete=models.CASCADE, unique=True)
     status = models.CharField(max_length=10, choices=book_status, default='unread')
+    status_value = models.IntegerField(default=0)
