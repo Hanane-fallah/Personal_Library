@@ -26,17 +26,13 @@ class AddBook(View):
         user = User.objects.get(id=1)
         book_lib = UserLibrary(user=user, file=book_obj)
         book_lib.save()
-        response = """
-        <h4> Done </h4>
-        <a href="{% url 'user_lib' 1 %}">see your library</a>
-        """
-        return HttpResponse(request, response)
+        return redirect('show_library')
 
 
 class UserLib(View):
     def get(self, request, user_id):
         user_books = UserLibrary.objects.all().filter(user_id=user_id)
-        books = Book.objects.all().filter(id__in=[u.id for u in user_books])
+        books = Book.objects.all().filter(id__in=[u.file_id for u in user_books])
         context = {
             'user_books': user_books,
             'books': books

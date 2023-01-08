@@ -9,8 +9,11 @@
 <h3>
 <!--todo: authors and book languages-->
     <li>Publish Year : {{ book.publish_year }}</li>
+    <li>Authors : {% for a in book.authors.all %} {{ a.name }} {% endfor %}</li>
+    <li>Languages : {% for l in book.book_language.all %} {{ l.name }} {% endfor %}</li>
+
     <li>Pages : {{ book.pages }}</li>
-    <li>Pages : {{ book.pages }}</li>
+    <li>Price : {{ book.price }}</li>
     <li>file : {{ book.file }}</li>
     <br>
     <a href="{% url 'user_lib' 1 %}">see your library</a>
