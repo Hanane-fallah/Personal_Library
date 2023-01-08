@@ -16,9 +16,8 @@
         <input type="button" value={{book}} name="book_file"> ~> Title : {{ book.title }} - {{ book.publish_year }}
         - <span>status : {{ b.status }}</span>
         {% load static %}
-        <a href="{% static file1.txt %}">Click</a>
-        <a href="{% url 'book_info' book.id %}">Info</a>
-        <a href="{% url 'book_read' book.id %}">Read</a>
+        <a href="{% url 'book_info' book.id %}">  Info</a>
+        <a href="{% url 'book_read' book.id %}">  Read</a>
         <br><br>
     </div>
 
